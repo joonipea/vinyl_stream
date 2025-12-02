@@ -2,7 +2,7 @@ import fs from "node:fs"
 import { $ } from "bun";
 
 async function identifySong() {
-    console.log(await $`ffmpeg -sseof -6 -y -i ../Music/stream.flac -ab 320k -id3v2_version 3 ../Music/stream/last_six_seconds.mp3`.text())
+    await $`ffmpeg -sseof -6 -y -i ../Music/stream/last_six_seconds.mp3 -ab 320k -id3v2_version 3 ../Music/stream/last_six_secondsi.mp3`
     const fs_file = fs.createReadStream('../Music/stream/last_six_seconds.mp3');
     const bun_file = await Bun.file('../Music/stream/last_six_seconds.mp3').arrayBuffer();
     const songData = {
