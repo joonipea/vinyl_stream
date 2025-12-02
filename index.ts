@@ -1,3 +1,4 @@
+import identifySong from "./tools/identifySong"
 
 function main() {
 
@@ -9,6 +10,10 @@ function main() {
       	},
 	"/": req => {
 	return new Response(Bun.file("index.html"))
+	},
+	"/identifySong": async (req) => {
+		const song_id = await identifySong()
+		return new Response(JSON.stringify(song_id));
 	},
 	"/*": req => {
 		    const pathName = new URL(req.url).pathname;
