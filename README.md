@@ -1,7 +1,8 @@
 # Vinyl Stream
 
 ## Description
-A way to stream audio over HSL
+A way to stream audio over HLS
+
 
 To install dependencies:
 
