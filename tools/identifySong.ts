@@ -2,8 +2,8 @@ import fs from "node:fs"
 import { $ } from "bun";
 
 async function identifySong() {
-    await $`yes | cp ../Music/stream.flac ../Music/stream_temp.flac && ffmpeg -sseof -00:00:06 -y -i ../Music/stream_temp.flac -ab 320k -id3v2_version 3 ../Music/stream/last_six_seconds.mp3`
-
+    await $`yes | cp ../Music/stream.flac ../Music/stream_temp.flac && ffmpeg -sseof -00:00:06.000 -y -i ../Music/stream_temp.flac -ab 320k -id3v2_version 3 ../Music/stream/last_six_seconds.mp3`;
+    await $`echo song snipped`;
     const fs_file = fs.createReadStream('../Music/stream/last_six_seconds.mp3');
     const bun_file = await Bun.file('../Music/stream/last_six_seconds.mp3').arrayBuffer();
     const songData = JSON.stringify({
