@@ -1,4 +1,7 @@
-# music_share
+# Vinyl Stream
+
+## Description
+A way to stream audio over HSL
 
 To install dependencies:
 
