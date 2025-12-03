@@ -15,6 +15,7 @@ async function identifySong() {
     console.log(res.ok, res.status);
     const res_json = await res.json()
     console.log(JSON.stringify(res_json));
+    console.log(current_fingerprint);
     return res_json;
 }
 
