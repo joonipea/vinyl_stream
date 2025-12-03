@@ -1,4 +1,3 @@
-import fs from "node:fs"
 import { $ } from "bun";
 
 async function identifySong() {
@@ -10,24 +9,9 @@ async function identifySong() {
 
     await $`yes | mv ../Music/stream/last_six_seconds_current.mp3 ../Music/stream/last_six_seconds.mp3`
     await $`ffmpeg -i ../Music/stream/last_six_seconds.mp3 -f chromaprint ../Music/stream/current_fingerprint.txt`
-    const fs_file = fs.createReadStream('../Music/stream/last_six_seconds.mp3');
-    const bun_file = await Bun.file('../Music/stream/last_six_seconds.mp3').arrayBuffer();
-    const songData = JSON.stringify({
-        'api_token': Bun.env.AUDD_API_KEY,
-        'file': fs_file,
-        'return': 'musicbrainz,apple_music,spotify',
-    });
-    const req = new Request({
-        url: 'https://api.audd.io/',
-        method: 'POST',
-        body: songData,
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
-    const res = await fetch('https://api.audd.io/',{
-        method: 'POST',
-        body: songData,
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+    const current_fingerprint = await Bun.file("../Music/stream/current_fingerprint.txt").text();
+    const acoustid_url = `https://api.acoustid.org/v2/lookup?client=${Bun.env.ACOUSTID_CLIENT_KEY}&duration=6&fingerprint=${current_fingerprint}`
+    const res = await fetch(acoustid_url);
     console.log(res.ok, res.status);
     const res_json = await res.json()
     console.log(JSON.stringify(res_json));
