@@ -12,8 +12,8 @@ function main() {
 	return new Response(Bun.file("index.html"))
 	},
 	"/identifySong": async (req) => {
-		await identifySong()
-		return new Response("song ided");
+		const song_id = await identifySong()
+		return new Response(JSON.stringify(song_id));
 	},
 	"/*": req => {
 		    const pathName = new URL(req.url).pathname;
