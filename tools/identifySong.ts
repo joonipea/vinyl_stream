@@ -2,6 +2,9 @@ import fs from "node:fs"
 import { $ } from "bun";
 
 async function identifySong() {
+    await $`ffmpeg -i ../Music/stream/stream.m3u8 -acodec copy \
+       -f segment -segment_wrap 2 -segment_time 6 \
+       ../Music/stream/last_six_seconds.mp3')`
     await $`echo song snipped`;
     const fs_file = fs.createReadStream('../Music/stream/last_six_seconds.mp3');
     const bun_file = await Bun.file('../Music/stream/last_six_seconds.mp3').arrayBuffer();
