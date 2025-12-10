@@ -3,7 +3,7 @@ import { $ } from "bun";
 async function identifySong() {
     try {
     await $`ffmpeg -n -i ../Music/stream/stream.m3u8 -segment_wrap 2 -segment_time 6 -t 6 ../Music/stream/last_six_seconds_current.mp3`
-    } catch (e) {
+    } catch (e: any) {
 	    console.log(e.message);
     }
 

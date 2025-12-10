@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+filename="stream"
+extension="flac"
+location="."
+remote_location="/mnt/remote/Media/music"
+playback=true
+identify=true
+
+
+while getopts ":n:e:l:p:r:" arg; do
+    case $arg in
+        n)
+            filename=$OPTARG
+            ;;
+        e)
+            extension=$OPTARG
+            ;;
+        l)
+            location=$OPTARG
+            ;;
+        p)
+            playback=$OPTARG
+            ;;
+        r)
+            if [ $OPTARG = true ]; then
+                    location=$remote_location
+            fi
+            ;;
+    esac
+done
+
+ffmpeg -y -f alsa -i default -listen 1  -f wav -ar 96000 - -ar 96000 \
+    ${location}/${filename}.${extension} -f hls -hls_flags delete_segments \
+    ${location}/stream/stream.m3u8 | \
+    if [ "$playback" = true ]; then
+        ffplay -f wav  -i - -autoexit
+    fi

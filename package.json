@@ -6,6 +6,9 @@
   "devDependencies": {
     "@types/bun": "latest"
   },
+  "scripts": {
+    "start": "bun run index.ts & ./record_vinyl_stream"
+  },
   "peerDependencies": {
     "typescript": "^5"
   }
