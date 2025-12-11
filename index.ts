@@ -1,15 +1,16 @@
 import identifySong from "./tools/identifySong"
 
 function main() {
+  const PORT = Bun.env.PORT || 7474;
 
   Bun.serve({
-    port: 7474,
+    port: PORT,
     routes:{
       "/stream.m3u8": req => {
-        return new Response(Bun.file("./stream/stream.m3u8"))
+        return new Response(Bun.file("./stream/stream.m3u8"));
         },
       "/": req => {
-        return new Response(Bun.file("index.html"))
+        return new Response(Bun.file("index.html"));
       },
       "/identifySong": async (req) => {
         const song_id = await identifySong()
@@ -17,7 +18,7 @@ function main() {
       },
       "/*": req => {
         const pathName = new URL(req.url).pathname;
-        return new Response(Bun.file(`./stream${pathName}`))
+        return new Response(Bun.file(`./stream${pathName}`));
       }
     }
   })
