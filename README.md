@@ -48,20 +48,20 @@ bun run index.ts & ./record_vinyl_stream [options]
 
 #### available options
  -n: filename
- 
-    Set the filename of the recorded file. Defaults to "stream"
+
+Set the filename of the recorded file. Defaults to "stream"
  
  -e: extension
  
-    Set the extension of the recorded file. Defaults to "flac". Note: Make sure you have a codec installed for the target extension
+Set the extension of the recorded file. Defaults to "flac". Note: Make sure you have a codec installed for the target extension
 
  -l: location
     
-    Set the location of the recorded file. Don't touch will break things. TODO: Decouple recorded file location from HLS stream files
+Set the location of the recorded file. Don't touch will break things. TODO: Decouple recorded file location from HLS stream files
 
  -p: playback
 
-    Boolean. Playback audio to default device audio output. Defaults to true.
+Boolean. Playback audio to default device audio output. Defaults to true.
 
 ## Tested Systems
 
